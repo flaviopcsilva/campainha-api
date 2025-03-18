@@ -16,7 +16,9 @@ export class CampainhaController {
     @UseInterceptors(FileInterceptor('file'))
     async uploadFile(
         @UploadedFile() file: Express.Multer.File,
-        @Body('name') name: string // Captura o nome enviado no request
+        @Body('name') name: string,// Captura o nome enviado no request
+        @Body('latitude') latitude: string,
+        @Body('longitude') longitude: string
     ) {
         let fileUrl = this.defaultImageUrl; // Definição da URL padrão
 
@@ -33,7 +35,7 @@ export class CampainhaController {
         const userName = name?.trim() || 'Visitante'; // Se não enviar nome, usa "Visitante"
 
         // Envia a mensagem para o Telegram com o nome e a imagem/vídeo
-        await this.telegramService.sendTelegramMessage(userName, fileUrl);
+        await this.telegramService.sendTelegramMessage(userName, fileUrl, latitude, longitude);
 
         return { message: 'Arquivo enviado com sucesso!', url: fileUrl, name: userName };
     }
