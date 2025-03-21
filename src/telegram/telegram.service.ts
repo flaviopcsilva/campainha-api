@@ -7,7 +7,7 @@ export class TelegramService {
     private chatId = '1625345406';
 
     async sendTelegramMessage(name: string, fileUrl: string, latitude: string, longitude: string) {
-        const message = `🚪 Alguém tocou a campainha!\n👤 *${name}* está na campainha\n📍 Localização: [Abrir no Maps](https://www.google.com/maps?q=${latitude},${longitude})\n📷 Foto/Vídeo: ${fileUrl}`;
+        const message = `🚪 Alguém tocou a campainha!\n👤 *${name}* está tocando a campainha\n📍 Localização: [Abrir no Maps](https://www.google.com/maps?q=${latitude},${longitude})\n📷 Foto/Vídeo: ${fileUrl}`;
         await axios.post(`https://api.telegram.org/bot${this.botToken}/sendMessage`, {
             chat_id: this.chatId,
             text: message,
